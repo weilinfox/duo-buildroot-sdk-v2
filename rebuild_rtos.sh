@@ -113,9 +113,9 @@ function milkv_build()
   fi
    
   # clean_all
-  # build_all
   clean_rtos
-  build_rtos
+  build_all
+  # build_rtos
   if [ $? -eq 0 ]; then
     print_info "Build board ${MILKV_BOARD} success!"
   else
