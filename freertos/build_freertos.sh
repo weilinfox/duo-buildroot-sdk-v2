@@ -2,7 +2,13 @@
 set -e
 
 TOP_DIR="$( cd "$(dirname "$0")" ; pwd -P )/cvitek"
-TOOLCHAIN_FILE_PATH=$TOP_DIR/scripts/toolchain-aarch64-elf.cmake
+
+# not called by sdk build script
+[ -z "$(whereis riscv64-unknown-elf-gcc | cut -d':' -f 2)" ] && \
+    export PATH=${TOP_DIR}/../../host-tools/gcc/riscv64-elf-x86_64/bin/:$PATH && \
+    export DDR_64MB_SIZE=${DDR_64MB_SIZE:-y}
+
+TOOLCHAIN_FILE_PATH=$TOP_DIR/scripts/toolchain-riscv64-elf.cmake
 BUILD_PATH=$TOP_DIR/build
 INSTALL_PATH=$TOP_DIR/install
 #RUN_TYPE=CVIRTOS or BLINKY_DEMO or FULL_DEMO or POSIX_DEMO

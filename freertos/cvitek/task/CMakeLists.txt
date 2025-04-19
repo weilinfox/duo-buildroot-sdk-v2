@@ -6,6 +6,17 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
+# to build task/ without build the whole firmware
+# -DRUN_TYPE=CVIRTOS
+set(TOP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../")
+set(BUILD_ENV_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/")
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../scripts/toolchain-riscv64-elf.cmake")
+set(RUN_ARCH "riscv64")
+# set(CHIP "cv180x")
+
+# see https://cmake.org/cmake/help/latest/policy/CMP0175.html
+cmake_policy(SET CMP0175 OLD)
+
 set(CMAKE_INSTALL_PREFIX ${TOP_DIR}/install)
 set(CMAKE_INSTALL_INC_PREFIX ${TOP_DIR}/install/include)
 
