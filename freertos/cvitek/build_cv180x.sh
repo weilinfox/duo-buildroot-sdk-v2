@@ -7,11 +7,11 @@ TOP_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 [ -z "$(whereis riscv64-unknown-elf-gcc | cut -d':' -f 2)" ] && \
     export PATH=${TOP_DIR}/../../host-tools/gcc/riscv64-elf-x86_64/bin/:$PATH && \
     export DDR_64MB_SIZE=${DDR_64MB_SIZE:-y}
-BUILD_PATH=${BUILD_PATH:-"${TOP_DIR}/../../build"}
+BUILD_ENV_PATH=${BUILD_PATH:-"${TOP_DIR}/../../build"}
 
 TOOLCHAIN_FILE_PATH=$TOP_DIR/scripts/toolchain-riscv64-elf.cmake
 BUILD_FREERTOS_PATH=$TOP_DIR/build
-BUILD_ENV_PATH=$BUILD_PATH
+# BUILD_ENV_PATH=$BUILD_PATH
 INSTALL_PATH=$TOP_DIR/install
 #RUN_TYPE=CVIRTOS or BLINKY_DEMO or FULL_DEMO or POSIX_DEMO
 RUN_TYPE=CVIRTOS

@@ -209,7 +209,8 @@ function build_usage()
   echo "Usage:"
   echo "${BASH_SOURCE[0]}              - Show this menu"
   echo "${BASH_SOURCE[0]} lunch        - Select a board to build"
-  echo "${BASH_SOURCE[0]} [board]      - Build [board] directly, supported boards as follows:"
+  echo "${BASH_SOURCE[0]} [board]      - Configure [board] directly, supported boards as follows:"
+  echo "${BASH_SOURCE[0]} [board] build - Build [board] directly, supported boards as follows:"
 
   for board in "${MILKV_BOARD_ARRAY[@]}"; do
     print_info "$board"
@@ -250,6 +251,8 @@ get_toolchain
 export MILKV_BOARD="${MILKV_BOARD}"
 
 prepare_env
+
+[[ "$2" == "build" ]] || exit 0
 
 build_info
 

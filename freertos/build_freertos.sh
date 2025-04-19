@@ -9,11 +9,13 @@ TOP_DIR="$( cd "$(dirname "$0")" ; pwd -P )/cvitek"
     export DDR_64MB_SIZE=${DDR_64MB_SIZE:-y}
 
 TOOLCHAIN_FILE_PATH=$TOP_DIR/scripts/toolchain-riscv64-elf.cmake
+BUILD_ENV_PATH=${BUILD_PATH:-"${TOP_DIR}/../../build"}
 BUILD_PATH=$TOP_DIR/build
 INSTALL_PATH=$TOP_DIR/install
 #RUN_TYPE=CVIRTOS or BLINKY_DEMO or FULL_DEMO or POSIX_DEMO
 RUN_TYPE=CVIRTOS
-RUN_CHIP=cv1835
+RUN_ARCH=riscv64
+RUN_CHIP=cv180x
 
 echo "RUN TYPE: " $RUN_TYPE
 # clean build and install folder for clean build
@@ -26,6 +28,7 @@ pushd $BUILD_PATH/arch
 cmake -G Ninja -DCHIP=$RUN_CHIP  \
     -DTOP_DIR=$TOP_DIR \
     -DRUN_TYPE=$RUN_TYPE \
+    -DRUN_ARCH=$RUN_ARCH \
     -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE_PATH \
     $TOP_DIR/arch
 cmake --build . --target install -- -v
@@ -37,6 +40,7 @@ fi
 pushd $BUILD_PATH/kernel
 cmake -G Ninja -DCHIP=$RUN_CHIP  \
     -DTOP_DIR=$TOP_DIR \
+    -DRUN_ARCH=$RUN_ARCH \
     -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE_PATH \
     $TOP_DIR/kernel
 cmake --build . --target install -- -v
@@ -49,6 +53,8 @@ fi
 pushd $BUILD_PATH/common
 cmake -G Ninja -DCHIP=$RUN_CHIP  \
     -DTOP_DIR=$TOP_DIR \
+    -DRUN_ARCH=$RUN_ARCH \
+    -DBUILD_ENV_PATH=$BUILD_ENV_PATH \
     -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE_PATH \
     $TOP_DIR/common
 cmake --build . --target install -- -v
@@ -72,6 +78,8 @@ fi
 pushd $BUILD_PATH/driver
 cmake -G Ninja -DCHIP=$RUN_CHIP  \
     -DTOP_DIR=$TOP_DIR \
+    -DRUN_ARCH=$RUN_ARCH \
+    -DBUILD_ENV_PATH=$BUILD_ENV_PATH \
     -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE_PATH \
     $TOP_DIR/driver
 cmake --build . --target install -- -v
