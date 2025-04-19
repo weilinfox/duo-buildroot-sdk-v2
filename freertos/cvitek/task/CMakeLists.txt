@@ -16,7 +16,9 @@ set(RUN_ARCH "riscv64")
 # set(CHIP "cv180x")
 
 # see https://cmake.org/cmake/help/latest/policy/CMP0175.html
-cmake_policy(SET CMP0175 OLD)
+if(POLICY CMP0175)
+    cmake_policy(SET CMP0175 OLD)
+endif()
 
 set(CMAKE_INSTALL_PREFIX ${TOP_DIR}/install)
 set(CMAKE_INSTALL_INC_PREFIX ${TOP_DIR}/install/include)
