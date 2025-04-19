@@ -100,6 +100,8 @@ extern void main_blinky(void);
 extern void main_full(void);
 #elif defined POSIX_DEMO
 extern void main_posix(void);
+#elif defined RADIO_DEMO
+extern void main_radio(void);
 #else
 #error Invalid RUN_TYPE setting in build.sh.  See the comments at the top of this file and above the RUN_TYPE definition.
 #endif
@@ -151,6 +153,8 @@ int main(void)
 	{
 		main_posix();
 	}
+#elif defined RADIO_DEMO
+	main_radio();
 #else
 #error "Not correct running definition"
 #endif

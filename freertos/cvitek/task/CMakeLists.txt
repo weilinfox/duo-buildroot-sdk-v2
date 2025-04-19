@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS ON)
 
 # to build task/ without build the whole firmware
 # -DRUN_TYPE=CVIRTOS
+# -DRUN_TYPE=RADIO_DEMO
 set(TOP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../")
 set(BUILD_ENV_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/")
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../scripts/toolchain-riscv64-elf.cmake")
@@ -37,6 +38,8 @@ elseif (RUN_TYPE STREQUAL "POSIX_DEMO")
 elseif (RUN_TYPE STREQUAL "CVIRTOS")
     add_subdirectory(comm)
     add_subdirectory(rgn)
+elseif (RUN_TYPE STREQUAL "RADIO_DEMO")
+    add_subdirectory(radio)
 
 if(CONFIG_BOARD STREQUAL "cv181x_fpga" OR CONFIG_BOARD STREQUAL "cv181x_fpga_c906")
 	add_compile_definitions(FPGA_PORTING)
