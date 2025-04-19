@@ -2,6 +2,8 @@
 // Created by kosaka reiya on 19/4/25.
 //
 
+#include <stdint.h>
+
 #include "FreeRTOS.h"
 #include "task.h"
 
